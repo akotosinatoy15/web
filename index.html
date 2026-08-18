@@ -7,6 +7,11 @@
   <title>Vigenère Cipher Challenge</title>
 
   <style>
+
+    /* ==========================================================
+       GENERAL
+       ========================================================== */
+
     * {
       box-sizing: border-box;
     }
@@ -24,6 +29,11 @@
       padding: 40px 0;
     }
 
+
+    /* ==========================================================
+       HEADER
+       ========================================================== */
+
     header {
       text-align: center;
       margin-bottom: 35px;
@@ -40,6 +50,11 @@
       font-size: 16px;
     }
 
+
+    /* ==========================================================
+       GENERAL CARD
+       ========================================================== */
+
     .card {
       background: #1e293b;
       border: 1px solid #334155;
@@ -53,6 +68,11 @@
       margin-top: 0;
       color: #f8fafc;
     }
+
+
+    /* ==========================================================
+       FORM
+       ========================================================== */
 
     label {
       display: block;
@@ -83,6 +103,11 @@
       border-color: #38bdf8;
     }
 
+
+    /* ==========================================================
+       BUTTONS
+       ========================================================== */
+
     button {
       border: 0;
       border-radius: 8px;
@@ -108,6 +133,11 @@
       background: #64748b;
     }
 
+
+    /* ==========================================================
+       STATUS
+       ========================================================== */
+
     .status {
       margin-top: 15px;
       padding: 10px;
@@ -127,85 +157,128 @@
       color: #fecaca;
     }
 
+
     /* ==========================================================
        PUBLIC CIPHER FEED
        ========================================================== */
 
+    /*
+      Every cipher is displayed as ONE horizontal card
+      containing THREE columns.
+    */
+
     .feed-item {
+      display: grid;
+
+      /*
+        Column 1 = Cipher information
+        Column 2 = Encrypted message
+        Column 3 = Decryption
+      */
+
+      grid-template-columns: 1fr 1.5fr 1.5fr;
+
       background: #172235;
+
       border: 1px solid #334155;
       border-radius: 14px;
+
       margin-top: 20px;
+
       overflow: hidden;
     }
 
-    /*
-      Each cipher has 3 vertical sections:
-      1. Cipher Information
-      2. Encrypted Message
-      3. Decrypt Section
-    */
+
+    /* ==========================================================
+       THREE COLUMNS
+       ========================================================== */
 
     .feed-section {
       padding: 20px;
-      border-bottom: 1px solid #334155;
+      min-width: 0;
     }
 
-    .feed-section:last-child {
-      border-bottom: none;
-    }
 
     /* ==========================================================
-       PART 1 - CIPHER INFORMATION
+       COLUMN 1
+       CIPHER INFORMATION
        ========================================================== */
 
     .cipher-info {
       background: #1e293b;
+
+      border-right: 1px solid #334155;
     }
 
     .cipher-number {
       color: #38bdf8;
+
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 8px;
+
+      line-height: 1.4;
+
+      margin-bottom: 10px;
     }
 
     .timestamp {
       color: #94a3b8;
+
       font-size: 13px;
+
+      line-height: 1.5;
     }
 
+
     /* ==========================================================
-       PART 2 - ENCRYPTED MESSAGE
+       COLUMN 2
+       ENCRYPTED MESSAGE
        ========================================================== */
 
     .cipher-message {
       background: #0f172a;
+
+      border-right: 1px solid #334155;
     }
 
     .section-title {
       color: #cbd5e1;
+
       font-size: 13px;
+
       font-weight: bold;
+
       text-transform: uppercase;
-      margin-bottom: 10px;
+
       letter-spacing: 0.5px;
+
+      margin-bottom: 12px;
     }
 
     .ciphertext {
       padding: 15px;
+
       border-radius: 8px;
-      background: #020617;
+
       border: 1px solid #334155;
+
+      background: #020617;
+
       color: #67e8f9;
+
       font-family: monospace;
+
       font-size: 15px;
+
       word-break: break-word;
+
       line-height: 1.6;
     }
 
+
     /* ==========================================================
-       PART 3 - DECRYPT SECTION
+       COLUMN 3
+       DECRYPT SECTION
        ========================================================== */
 
     .decrypt-section {
@@ -214,7 +287,9 @@
 
     .decrypt-area {
       display: flex;
+
       flex-direction: column;
+
       gap: 10px;
     }
 
@@ -224,44 +299,75 @@
 
     .decrypt-area button {
       width: 100%;
+
       margin-top: 0;
     }
 
     .decrypted {
       display: none;
+
       margin-top: 12px;
+
       padding: 12px;
+
       border-radius: 7px;
+
       background: #052e16;
+
       color: #86efac;
+
       word-break: break-word;
+
       line-height: 1.5;
     }
 
+
+    /* ==========================================================
+       EMPTY FEED
+       ========================================================== */
+
     .empty {
       text-align: center;
+
       padding: 30px;
+
       color: #64748b;
     }
+
+
+    /* ==========================================================
+       INFORMATION TEXT
+       ========================================================== */
 
     .info {
       color: #94a3b8;
+
       font-size: 14px;
+
       line-height: 1.6;
     }
 
+
+    /* ==========================================================
+       FOOTER
+       ========================================================== */
+
     footer {
       text-align: center;
+
       color: #64748b;
+
       padding: 20px;
+
       font-size: 13px;
     }
+
 
     /* ==========================================================
        MOBILE RESPONSIVE
        ========================================================== */
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
 
       header h1 {
         font-size: 28px;
@@ -269,6 +375,7 @@
 
       .container {
         width: 94%;
+
         padding: 25px 0;
       }
 
@@ -276,8 +383,31 @@
         padding: 18px;
       }
 
+
+      /*
+        On smaller screens, the three columns
+        become vertical so the content remains readable.
+      */
+
+      .feed-item {
+        grid-template-columns: 1fr;
+      }
+
+
+      .cipher-info {
+        border-right: none;
+
+        border-bottom: 1px solid #334155;
+      }
+
+      .cipher-message {
+        border-right: none;
+
+        border-bottom: 1px solid #334155;
+      }
+
       .feed-section {
-        padding: 16px;
+        padding: 18px;
       }
 
       .cipher-number {
@@ -295,29 +425,35 @@
       .decrypt-area button {
         width: 100%;
       }
+
     }
+
   </style>
 </head>
+
 
 <body>
 
 <div class="container">
+
 
   <!-- ==========================================================
        HEADER
        ========================================================== -->
 
   <header>
+
     <h1>🔐 Vigenère Cipher Challenge</h1>
 
     <p>
       Encrypt a message, publish the ciphertext, and challenge others to decrypt it.
     </p>
+
   </header>
 
 
   <!-- ==========================================================
-       CREATE PUZZLE
+       CREATE CIPHER CHALLENGE
        ========================================================== -->
 
   <section class="card">
@@ -325,13 +461,21 @@
     <h2>Create a Cipher Challenge</h2>
 
     <p class="info">
+
       Enter your message and a secret key. Your message will be encrypted
       using the Vigenère cipher and the ciphertext will appear in the public feed.
+
     </p>
+
 
     <form id="cipherForm">
 
-      <label for="message">Your Message</label>
+
+      <!-- MESSAGE -->
+
+      <label for="message">
+        Your Message
+      </label>
 
       <textarea
         id="message"
@@ -340,7 +484,11 @@
       ></textarea>
 
 
-      <label for="key">Secret Key</label>
+      <!-- SECRET KEY -->
+
+      <label for="key">
+        Secret Key
+      </label>
 
       <input
         id="key"
@@ -350,32 +498,52 @@
       >
 
 
+      <!-- ENCRYPT -->
+
       <button type="submit">
         🔒 Encrypt & Publish
       </button>
 
     </form>
 
-    <div id="formStatus" class="status"></div>
+
+    <!-- STATUS -->
+
+    <div
+      id="formStatus"
+      class="status"
+    ></div>
 
   </section>
 
 
+
   <!-- ==========================================================
-       PUBLIC FEED
+       PUBLIC CIPHER FEED
        ========================================================== -->
 
   <section class="card">
 
-    <h2>🌐 Public Cipher Feed</h2>
+    <h2>
+      🌐 Public Cipher Feed
+    </h2>
 
     <p class="info">
+
       Try to decrypt the messages below. Enter a key and press
       <strong>Decrypt</strong>.
+
     </p>
 
+
+    <!-- CIPHERS WILL BE INSERTED HERE -->
+
     <div id="feed">
-      <div class="empty">Loading challenges...</div>
+
+      <div class="empty">
+        Loading challenges...
+      </div>
+
     </div>
 
   </section>
@@ -383,17 +551,22 @@
 </div>
 
 
+
 <!-- ==========================================================
      FOOTER
      ========================================================== -->
 
 <footer>
+
   Vigenère Cipher Challenge
+
 </footer>
 
 
+
 <!-- ==========================================================
-     HIDDEN IFRAME USED FOR CROSS-ORIGIN POST
+     HIDDEN IFRAME
+     Used for cross-origin POST
      ========================================================== -->
 
 <iframe
@@ -403,132 +576,225 @@
 ></iframe>
 
 
+
 <script>
+
 
   /*
    * ==========================================================
    * GOOGLE APPS SCRIPT API
    * ==========================================================
-   *
-   * Replace this with your deployed Google Apps Script URL
-   * if you change your Apps Script deployment.
    */
 
   const API_URL =
     "https://script.google.com/macros/s/AKfycbzvbnnjhpZ0gI8KXQkaH0AbhzQSkTez5maWVqeHkdq2lsB9tPNiCowukMo-K0KMJUiFOA/exec";
 
 
+
   /*
    * ==========================================================
-   * VIGENERE CIPHER - ENCRYPT
+   * VIGENERE CIPHER
+   * ENCRYPT
    * ==========================================================
    */
 
   function vigenereEncrypt(text, key) {
 
+
     if (!key || !key.trim()) {
-      throw new Error("A key is required.");
+
+      throw new Error(
+        "A key is required."
+      );
+
     }
 
-    key = key.replace(/[^a-zA-Z]/g, "").toUpperCase();
+
+    key =
+      key
+        .replace(/[^a-zA-Z]/g, "")
+        .toUpperCase();
+
 
     if (!key) {
-      throw new Error("The key must contain letters.");
+
+      throw new Error(
+        "The key must contain letters."
+      );
+
     }
 
+
     let result = "";
+
     let keyIndex = 0;
 
-    for (let i = 0; i < text.length; i++) {
 
-      const char = text[i];
+    for (
+      let i = 0;
+      i < text.length;
+      i++
+    ) {
+
+
+      const char =
+        text[i];
+
 
       if (/[a-zA-Z]/.test(char)) {
 
-        const isUpper = char === char.toUpperCase();
 
-        const base = isUpper ? 65 : 97;
+        const isUpper =
+          char === char.toUpperCase();
+
+
+        const base =
+          isUpper ? 65 : 97;
+
 
         const textValue =
           char.charCodeAt(0) - base;
 
+
         const keyValue =
-          key.charCodeAt(keyIndex % key.length) - 65;
+          key.charCodeAt(
+            keyIndex % key.length
+          ) - 65;
+
 
         const encrypted =
           (textValue + keyValue) % 26;
 
-        result += String.fromCharCode(
-          encrypted + base
-        );
+
+        result +=
+          String.fromCharCode(
+            encrypted + base
+          );
+
 
         keyIndex++;
 
+
       } else {
 
-        // Keep spaces, punctuation and numbers unchanged
+
+        /*
+          Keep spaces,
+          punctuation,
+          and numbers unchanged.
+        */
+
         result += char;
+
       }
+
     }
 
+
     return result;
+
   }
+
 
 
   /*
    * ==========================================================
-   * VIGENERE CIPHER - DECRYPT
+   * VIGENERE CIPHER
+   * DECRYPT
    * ==========================================================
    */
 
   function vigenereDecrypt(text, key) {
 
+
     if (!key || !key.trim()) {
-      throw new Error("A key is required.");
+
+      throw new Error(
+        "A key is required."
+      );
+
     }
 
-    key = key.replace(/[^a-zA-Z]/g, "").toUpperCase();
+
+    key =
+      key
+        .replace(/[^a-zA-Z]/g, "")
+        .toUpperCase();
+
 
     if (!key) {
-      throw new Error("The key must contain letters.");
+
+      throw new Error(
+        "The key must contain letters."
+      );
+
     }
 
+
     let result = "";
+
     let keyIndex = 0;
 
-    for (let i = 0; i < text.length; i++) {
 
-      const char = text[i];
+    for (
+      let i = 0;
+      i < text.length;
+      i++
+    ) {
+
+
+      const char =
+        text[i];
+
 
       if (/[a-zA-Z]/.test(char)) {
 
-        const isUpper = char === char.toUpperCase();
 
-        const base = isUpper ? 65 : 97;
+        const isUpper =
+          char === char.toUpperCase();
+
+
+        const base =
+          isUpper ? 65 : 97;
+
 
         const textValue =
           char.charCodeAt(0) - base;
 
+
         const keyValue =
-          key.charCodeAt(keyIndex % key.length) - 65;
+          key.charCodeAt(
+            keyIndex % key.length
+          ) - 65;
+
 
         const decrypted =
           (textValue - keyValue + 26) % 26;
 
-        result += String.fromCharCode(
-          decrypted + base
-        );
+
+        result +=
+          String.fromCharCode(
+            decrypted + base
+          );
+
 
         keyIndex++;
 
+
       } else {
 
+
         result += char;
+
       }
+
     }
 
+
     return result;
+
   }
+
 
 
   /*
@@ -538,221 +804,363 @@
    */
 
   const cipherForm =
-    document.getElementById("cipherForm");
+    document.getElementById(
+      "cipherForm"
+    );
 
 
-  cipherForm.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-    const message =
-      document.getElementById("message").value.trim();
-
-    const key =
-      document.getElementById("key").value.trim();
-
-    const status =
-      document.getElementById("formStatus");
+  cipherForm.addEventListener(
+    "submit",
+    function(event) {
 
 
-    /*
-     * Validate input
-     */
+      event.preventDefault();
 
-    if (!message || !key) {
 
-      showStatus(
-        "Please enter both a message and a secret key.",
-        "error"
+      /*
+       * Get message
+       */
+
+      const message =
+        document
+          .getElementById("message")
+          .value
+          .trim();
+
+
+      /*
+       * Get key
+       */
+
+      const key =
+        document
+          .getElementById("key")
+          .value
+          .trim();
+
+
+      /*
+       * Get status element
+       */
+
+      const status =
+        document.getElementById(
+          "formStatus"
+        );
+
+
+      /*
+       * Validate
+       */
+
+      if (!message || !key) {
+
+
+        showStatus(
+
+          "Please enter both a message and a secret key.",
+
+          "error"
+
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+       * Encrypt message
+       */
+
+      let ciphertext;
+
+
+      try {
+
+
+        ciphertext =
+          vigenereEncrypt(
+            message,
+            key
+          );
+
+
+      } catch (error) {
+
+
+        showStatus(
+
+          error.message,
+
+          "error"
+
+        );
+
+
+        return;
+
+      }
+
+
+
+      /*
+       * ========================================================
+       * SEND TO GOOGLE APPS SCRIPT
+       * ========================================================
+       */
+
+      const form =
+        document.createElement(
+          "form"
+        );
+
+
+      form.method =
+        "POST";
+
+
+      form.action =
+        API_URL;
+
+
+      form.target =
+        "postFrame";
+
+
+      form.style.display =
+        "none";
+
+
+
+      /*
+       * Action
+       */
+
+      addHiddenInput(
+
+        form,
+
+        "action",
+
+        "add"
+
       );
 
-      return;
-    }
 
 
-    /*
-     * Encrypt message
-     */
+      /*
+       * Ciphertext
+       */
 
-    let ciphertext;
+      addHiddenInput(
 
-    try {
+        form,
 
-      ciphertext =
-        vigenereEncrypt(message, key);
+        "ciphertext",
 
-    } catch (error) {
+        ciphertext
 
-      showStatus(
-        error.message,
-        "error"
       );
 
-      return;
+
+
+      /*
+       * Plaintext
+       */
+
+      addHiddenInput(
+
+        form,
+
+        "plaintext",
+
+        message
+
+      );
+
+
+
+      /*
+       * Key
+       */
+
+      addHiddenInput(
+
+        form,
+
+        "key",
+
+        key
+
+      );
+
+
+
+      /*
+       * Submit
+       */
+
+      document.body.appendChild(
+        form
+      );
+
+
+      form.submit();
+
+
+      document.body.removeChild(
+        form
+      );
+
+
+
+      /*
+       * Show success
+       */
+
+      showStatus(
+
+        "✓ Challenge published successfully!",
+
+        "success"
+
+      );
+
+
+
+      /*
+       * Reset form
+       */
+
+      cipherForm.reset();
+
+
+
+      /*
+       * Reload feed after
+       * Google Sheets updates
+       */
+
+      setTimeout(
+
+        loadFeed,
+
+        1200
+
+      );
+
     }
+  );
 
-
-    /*
-     * Use a normal HTML form submission instead of fetch().
-     *
-     * This avoids cross-origin POST/CORS problems when the
-     * HTML page is hosted on GitHub Pages.
-     */
-
-    const form =
-      document.createElement("form");
-
-    form.method = "POST";
-    form.action = API_URL;
-    form.target = "postFrame";
-    form.style.display = "none";
-
-
-    /*
-     * Action
-     */
-
-    addHiddenInput(
-      form,
-      "action",
-      "add"
-    );
-
-
-    /*
-     * Ciphertext
-     */
-
-    addHiddenInput(
-      form,
-      "ciphertext",
-      ciphertext
-    );
-
-
-    /*
-     * Original plaintext
-     */
-
-    addHiddenInput(
-      form,
-      "plaintext",
-      message
-    );
-
-
-    /*
-     * Secret key
-     */
-
-    addHiddenInput(
-      form,
-      "key",
-      key
-    );
-
-
-    document.body.appendChild(form);
-
-    form.submit();
-
-    document.body.removeChild(form);
-
-
-    /*
-     * Show success message
-     */
-
-    showStatus(
-      "✓ Challenge published successfully!",
-      "success"
-    );
-
-
-    /*
-     * Clear form
-     */
-
-    cipherForm.reset();
-
-
-    /*
-     * Give Apps Script a moment to write the spreadsheet,
-     * then reload the public feed.
-     */
-
-    setTimeout(
-      loadFeed,
-      1200
-    );
-
-  });
 
 
   /*
    * ==========================================================
-   * ADD HIDDEN FORM INPUT
+   * ADD HIDDEN INPUT
    * ==========================================================
    */
 
-  function addHiddenInput(form, name, value) {
+  function addHiddenInput(
+    form,
+    name,
+    value
+  ) {
+
 
     const input =
-      document.createElement("input");
+      document.createElement(
+        "input"
+      );
 
-    input.type = "hidden";
 
-    input.name = name;
+    input.type =
+      "hidden";
 
-    input.value = value;
 
-    form.appendChild(input);
+    input.name =
+      name;
+
+
+    input.value =
+      value;
+
+
+    form.appendChild(
+      input
+    );
+
   }
 
 
+
   /*
    * ==========================================================
-   * SHOW FORM STATUS
+   * SHOW STATUS
    * ==========================================================
    */
 
-  function showStatus(message, type) {
+  function showStatus(
+    message,
+    type
+  ) {
+
 
     const status =
-      document.getElementById("formStatus");
+      document.getElementById(
+        "formStatus"
+      );
 
-    status.textContent = message;
+
+    status.textContent =
+      message;
+
 
     status.className =
       "status " + type;
+
   }
+
 
 
   /*
    * ==========================================================
    * LOAD PUBLIC FEED
-   *
-   * Uses JSONP because the HTML may be hosted on GitHub
-   * while Apps Script is hosted on Google's domain.
    * ==========================================================
    */
 
   function loadFeed() {
 
+
     if (
+
       !API_URL ||
-      API_URL.includes("PASTE_YOUR")
+
+      API_URL.includes(
+        "PASTE_YOUR"
+      )
+
     ) {
 
-      document.getElementById("feed").innerHTML =
-        '<div class="empty">Configure your Apps Script URL first.</div>';
+
+      document
+        .getElementById("feed")
+        .innerHTML =
+
+        '<div class="empty">' +
+        'Configure your Apps Script URL first.' +
+        '</div>';
+
 
       return;
+
     }
 
 
+
     /*
-     * Create a unique JSONP callback name
+     * Create unique callback name
      */
 
     const callbackName =
@@ -760,23 +1168,39 @@
       Date.now();
 
 
+
     /*
-     * Create callback
+     * JSONP callback
      */
 
     window[callbackName] =
       function(data) {
 
+
         try {
 
-          displayFeed(data);
+
+          displayFeed(
+            data
+          );
+
 
         } finally {
 
-          delete window[callbackName];
 
-          if (script.parentNode) {
-            script.parentNode.removeChild(script);
+          delete window[
+            callbackName
+          ];
+
+
+          if (
+            script.parentNode
+          ) {
+
+            script.parentNode.removeChild(
+              script
+            );
+
           }
 
         }
@@ -784,18 +1208,27 @@
       };
 
 
+
     /*
-     * Create script element
+     * Create script
      */
 
     const script =
-      document.createElement("script");
+      document.createElement(
+        "script"
+      );
 
 
     script.src =
+
       API_URL +
+
       "?action=list&callback=" +
-      encodeURIComponent(callbackName);
+
+      encodeURIComponent(
+        callbackName
+      );
+
 
 
     /*
@@ -805,21 +1238,45 @@
     script.onerror =
       function() {
 
-        document.getElementById("feed").innerHTML =
-          '<div class="empty">Unable to load the public feed.</div>';
 
-        delete window[callbackName];
+        document
+          .getElementById("feed")
+          .innerHTML =
 
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
+          '<div class="empty">' +
+          'Unable to load the public feed.' +
+          '</div>';
+
+
+        delete window[
+          callbackName
+        ];
+
+
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
         }
 
       };
 
 
-    document.body.appendChild(script);
+
+    /*
+     * Add script
+     */
+
+    document.body.appendChild(
+      script
+    );
 
   }
+
 
 
   /*
@@ -830,40 +1287,64 @@
 
   function displayFeed(data) {
 
+
     const feed =
-      document.getElementById("feed");
+      document.getElementById(
+        "feed"
+      );
+
 
 
     /*
-     * Check if there are messages
+     * No messages
      */
 
     if (
+
       !data ||
-      !Array.isArray(data.messages) ||
+
+      !Array.isArray(
+        data.messages
+      ) ||
+
       data.messages.length === 0
+
     ) {
 
+
       feed.innerHTML =
-        '<div class="empty">No cipher challenges yet. Be the first!</div>';
+
+        '<div class="empty">' +
+        'No cipher challenges yet. Be the first!' +
+        '</div>';
+
 
       return;
+
     }
 
 
+
     /*
-     * Clear existing feed
+     * Clear current feed
      */
 
-    feed.innerHTML = "";
+    feed.innerHTML =
+      "";
+
 
 
     /*
-     * Create each cipher challenge
+     * Create every cipher
      */
 
     data.messages.forEach(
-      function(item, index) {
+
+      function(
+        item,
+        index
+      ) {
+
 
 
         /*
@@ -873,24 +1354,32 @@
          */
 
         const wrapper =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         wrapper.className =
           "feed-item";
 
 
+
         /*
          * ======================================================
-         * PART 1
+         * COLUMN 1
          * CIPHER INFORMATION
          * ======================================================
          */
 
         const infoSection =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         infoSection.className =
           "feed-section cipher-info";
+
 
 
         /*
@@ -898,14 +1387,19 @@
          */
 
         const cipherNumber =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         cipherNumber.className =
           "cipher-number";
 
+
         cipherNumber.textContent =
           "🔐 Cipher Challenge #" +
           (index + 1);
+
 
 
         /*
@@ -913,55 +1407,73 @@
          */
 
         const timestamp =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         timestamp.className =
           "timestamp";
 
+
         timestamp.textContent =
           "Posted: " +
-          formatTimestamp(item.timestamp);
+          formatTimestamp(
+            item.timestamp
+          );
+
 
 
         /*
-         * Add information elements
+         * Add column 1 content
          */
 
         infoSection.appendChild(
           cipherNumber
         );
 
+
         infoSection.appendChild(
           timestamp
         );
 
 
+
         /*
          * ======================================================
-         * PART 2
+         * COLUMN 2
          * ENCRYPTED MESSAGE
          * ======================================================
          */
 
         const messageSection =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         messageSection.className =
           "feed-section cipher-message";
 
 
+
         /*
-         * Section title
+         * Title
          */
 
         const messageTitle =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         messageTitle.className =
           "section-title";
 
+
         messageTitle.textContent =
           "Encrypted Message";
+
 
 
         /*
@@ -969,54 +1481,70 @@
          */
 
         const cipher =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         cipher.className =
           "ciphertext";
+
 
         cipher.textContent =
           item.ciphertext;
 
 
+
         /*
-         * Add message elements
+         * Add column 2 content
          */
 
         messageSection.appendChild(
           messageTitle
         );
 
+
         messageSection.appendChild(
           cipher
         );
 
 
+
         /*
          * ======================================================
-         * PART 3
-         * DECRYPT SECTION
+         * COLUMN 3
+         * DECRYPT
          * ======================================================
          */
 
         const decryptSection =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         decryptSection.className =
           "feed-section decrypt-section";
 
 
+
         /*
-         * Section title
+         * Title
          */
 
         const decryptTitle =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         decryptTitle.className =
           "section-title";
 
+
         decryptTitle.textContent =
           "Decrypt This Message";
+
 
 
         /*
@@ -1024,24 +1552,33 @@
          */
 
         const decryptArea =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         decryptArea.className =
           "decrypt-area";
 
 
+
         /*
-         * Secret key input
+         * Key input
          */
 
         const keyInput =
-          document.createElement("input");
+          document.createElement(
+            "input"
+          );
+
 
         keyInput.type =
           "text";
 
+
         keyInput.placeholder =
           "Enter secret key...";
+
 
 
         /*
@@ -1049,92 +1586,123 @@
          */
 
         const decryptButton =
-          document.createElement("button");
+          document.createElement(
+            "button"
+          );
+
 
         decryptButton.type =
           "button";
+
 
         decryptButton.textContent =
           "🔓 Decrypt";
 
 
+
         /*
-         * Decrypted result
+         * Result
          */
 
         const result =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         result.className =
           "decrypted";
 
 
+
         /*
          * ======================================================
-         * DECRYPT BUTTON EVENT
+         * DECRYPT BUTTON
          * ======================================================
          */
 
         decryptButton.addEventListener(
+
           "click",
+
           function() {
+
 
             const key =
               keyInput.value.trim();
 
 
+
             /*
-             * Check key
+             * Empty key
              */
 
             if (!key) {
 
+
               result.style.display =
                 "block";
+
 
               result.style.background =
                 "#7f1d1d";
 
+
               result.style.color =
                 "#fecaca";
+
 
               result.textContent =
                 "Please enter a key.";
 
+
               return;
+
             }
 
 
+
             /*
-             * Try to decrypt
+             * Decrypt
              */
 
             try {
 
+
               const plaintext =
                 vigenereDecrypt(
+
                   item.ciphertext,
+
                   key
+
                 );
+
 
 
               result.style.display =
                 "block";
 
+
               result.style.background =
                 "#052e16";
 
+
               result.style.color =
                 "#86efac";
+
 
               result.textContent =
                 "Decrypted: " +
                 plaintext;
 
+
             } catch (error) {
+
 
               result.style.display =
                 "block";
+
 
               result.textContent =
                 error.message;
@@ -1142,7 +1710,9 @@
             }
 
           }
+
         );
+
 
 
         /*
@@ -1153,31 +1723,36 @@
           keyInput
         );
 
+
         decryptArea.appendChild(
           decryptButton
         );
 
 
+
         /*
-         * Add everything to Part 3
+         * Add column 3 content
          */
 
         decryptSection.appendChild(
           decryptTitle
         );
 
+
         decryptSection.appendChild(
           decryptArea
         );
+
 
         decryptSection.appendChild(
           result
         );
 
 
+
         /*
          * ======================================================
-         * ADD THE THREE PARTS TO THE CIPHER CARD
+         * ADD THE THREE COLUMNS
          * ======================================================
          */
 
@@ -1185,17 +1760,20 @@
           infoSection
         );
 
+
         wrapper.appendChild(
           messageSection
         );
+
 
         wrapper.appendChild(
           decryptSection
         );
 
 
+
         /*
-         * Add complete cipher card to public feed
+         * Add complete cipher to feed
          */
 
         feed.appendChild(
@@ -1203,9 +1781,11 @@
         );
 
       }
+
     );
 
   }
+
 
 
   /*
@@ -1214,20 +1794,36 @@
    * ==========================================================
    */
 
-  function formatTimestamp(timestamp) {
+  function formatTimestamp(
+    timestamp
+  ) {
+
 
     if (!timestamp) {
+
       return "Unknown time";
+
     }
+
 
 
     const date =
-      new Date(timestamp);
+      new Date(
+        timestamp
+      );
 
 
-    if (isNaN(date.getTime())) {
+
+    if (
+      isNaN(
+        date.getTime()
+      )
+    ) {
+
       return timestamp;
+
     }
+
 
 
     return date.toLocaleString();
@@ -1235,25 +1831,31 @@
   }
 
 
+
   /*
    * ==========================================================
-   * LOAD FEED WHEN PAGE OPENS
+   * INITIAL LOAD
    * ==========================================================
    */
 
   loadFeed();
 
 
+
   /*
    * ==========================================================
-   * AUTOMATICALLY REFRESH FEED EVERY 30 SECONDS
+   * AUTO REFRESH
    * ==========================================================
    */
 
   setInterval(
+
     loadFeed,
+
     30000
+
   );
+
 
 </script>
 
